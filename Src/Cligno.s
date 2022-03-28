@@ -23,8 +23,7 @@ FlagCligno dcd 0;
 ;Section ROM code (read only) :		
 	area    moncode,code,readonly
 ; écrire le code ici		
-;GPIOB_Set equ 0x40010C10
-;GPIOB_Clear equ 0x4000043C;	
+	
 
 timer_callback proc
 	push {lr, r4, r5}
