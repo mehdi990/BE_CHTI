@@ -22,15 +22,25 @@ Dialog DLL:      TCM.DLL V1.48.0.0
  
 <h2>Project:</h2>
 U:\Windows\Bureau\PjtKEIL_StepSon\StepSon.uvprojx
-Project File Date:  03/28/2022
+Project File Date:  04/04/2022
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Build target 'CibleSondeST'
+Rebuild target 'Simu'
+assembling startup-rvds.s...
+assembling bruitverre.asm...
 assembling GestionSon.s...
-Src\GestionSon.s(3): error: A1137E: Unexpected characters at end of line
-Src\GestionSon.s(45): warning: A1447W: Missing END directive at end of file, but found a label named END
-".\Obj\StepSon.axf" - 1 Error(s), 1 Warning(s).
+Src\GestionSon.s(79): warning: A1447W: Missing END directive at end of file, but found a label named END
+compiling principal.c...
+Src\GestionSon.h(4): warning:  #1295-D: Deprecated declaration CallbackSon - give arg types
+  void CallbackSon();
+Src\GestionSon.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif 
+Src\principal.c: 2 warnings, 0 errors
+linking...
+Program Size: Code=2464 RO-data=11300 RW-data=168 ZI-data=1024  
+FromELF: creating hex file...
+".\Obj\StepSon.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -46,15 +56,14 @@ Package Vendor: Keil
                 STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
 
 <h2>Collection of Component include folders:</h2>
-  .\RTE\_CibleSondeST
+  .\RTE\_Simu
   C:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include
   C:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.4.0
-Target not created.
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>
