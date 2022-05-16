@@ -2,6 +2,10 @@
 
 #include "DriverJeuLaser.h"
 
+extern int THEDFT(short int* signal64ech, char k);
+extern short LeSignal[64];
+int resultat[64];
+
 
 
 int main(void)
@@ -20,7 +24,10 @@ CLOCK_Configure();
 
 //============================================================================	
 	
-	
+for(int k=0;k<64;k++){
+
+	resultat[k]=THEDFT(LeSignal,k);
+}
 while	(1)
 	{
 	}

@@ -1,8 +1,9 @@
 	PRESERVE8
 	THUMB   
 		
-	export TabCos
-	export TabSin
+
+	EXPORT THEDFT
+	IMPORT LeSignal
 	
 ; ====================== zone de réservation de données,  ======================================
 ;Section RAM (read only) :
@@ -22,35 +23,51 @@
 ;Section ROM code (read only) :		
 	area    moncode,code,readonly
 ; écrire le code ici		
-THEDFT
-	push{r4-r8,lr}
-	mov r5,#0
-	mov r3,#0; index
+THEDFT proc
+	push{r4-r9}
+	mov r6,#0
+	mov r3,#0; index ; L'index du tableau
+	mov r9,#0; partie imaginaire
 iteration
-	add r3,#1
-	cmp r3,64
+	
+	cmp r3,#64
 	beq boucleExit
-	ldrsh r4,[r0,r3,lsl#1]
-	add r5,r5,r4
+	;cos
+	mul r5,r1,r3 ; k*n
+	and r5,#0x003F
+	ldrsh r4,[r0,r3,lsl#1]; on lit la valeur du signal
+	;add r5,r5,r4
 	ldr r7,=TabCos
-	ldrsh r8,[r7,r3,lsl#1]
-	add r5,r8
+	ldrsh r8,[r7,r5,lsl#1]; on lit la valeur du tabcos
+	mul r4, r4, r8; x[n]* cos
+	add r6,r4
+	;sin
+
+	ldrsh r4,[r0,r3,lsl#1]; on lit la valeur du signal
+	ldr r7,=TabSin
+	ldrsh r8,[r7,r5,lsl#1]; on lit la valeur du tabsin
+	mul r4, r4, r8; x[n]* sin
+	add r9,r4
+	
+	
+	add r3,#1; on incremente l'index
 	
 	b iteration
 	
-	
 boucleExit
-	
+	smull r1, r0, r6, r6
+	smlal r1, r0, r9, r9
+	pop{r4-r9}
+	bx lr
+	endp
 
-
-
-
+ 
 ;Section ROM code (read only) :		
 	AREA Trigo, DATA, READONLY
 ; codage fractionnaire 1.15
 
 TabCos
-	DCW	32767	;  0 0x7fff  0.99997
+	DCW	32767	;  0 0x7fff  0.99997     
 	DCW	32610	;  1 0x7f62  0.99518
 	DCW	32138	;  2 0x7d8a  0.98077
 	DCW	31357	;  3 0x7a7d  0.95694
